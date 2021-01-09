@@ -52,7 +52,7 @@ services:
         restart: on-failure
 
 volumes:
-  portainer:
+  portainer_data:
   nodered:
   influxdb:
   grafana:
