@@ -2,20 +2,6 @@
 version: "3"
 
 services:
-    portainer:
-        ports:
-            - '9009:9000'
-        volumes:
-            - '/var/run/docker.sock:/var/run/docker.sock'
-            - 'portainer_data:/data'
-            - '/opt/ssl/certs:/certs'
-        container_name: portainer
-        image: portainer/portainer
-        restart: on-failure
-        networks:
-            - management
-        command: --ssl  --sslcert /certs/host.fullchain.pem --sslkey /certs/host.key
-    
     nodered:
         container_name: node-red
         ports:
@@ -53,7 +39,6 @@ services:
         restart: on-failure
 
 volumes:
-  portainer_data:
   nodered:
   influxdb:
   grafana:
