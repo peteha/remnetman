@@ -1,0 +1,60 @@
+services:
+    portainer:
+        ports:
+            - '9009:9000'
+        volumes:
+            - '/var/run/docker.sock:/var/run/docker.sock'
+            - 'portainer_data:/data'
+            - '/opt/ssl/certs:/certs'
+        container_name: portainer
+        image: portainer/portainer
+        restart: on-failure
+        networks:
+            - management
+    
+    nodered:
+        container_name: node-red
+        ports:
+            - '1880:1880'
+        volumes:
+            - 'nodered:/data'
+        environment:
+            - NODE_OPTIONS=--max_old_space_size=128
+        image: nodered/node-red
+        networks:
+            - ops
+    
+    influxdb:
+        container_name: influxdb
+        image: "influxdb"
+        networks:
+          - ops
+        ports:
+          - "8086:8086"
+        volumes:
+          - influxdb:/var/lib/influxdb 
+        restart: on-failure
+        
+    grafana:
+        container_name: grafana
+        image: "grafana/grafana"
+        networks:
+          - ops
+        ports:
+          - "3000:3000"
+        volumes:
+          - grafana:/var/lib/grafana
+        environment:
+          - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,briangann-gauge-panel,vonage-status-panel,neocat-cal-heatmap-panel
+        restart: on-failure
+
+volumes:
+  portainer:
+  nodered:
+  influxdb:
+  grafana:
+
+networks:
+  ops:
+  management:
+  
