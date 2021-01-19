@@ -1,55 +1,59 @@
-
-version: "3"
+---
+version: '2.3'
 
 services:
+  telegraf:
+    container_name: telegraf
+    image: telegraf
+    environment:
+      - HOST_PROC=/host/proc
+    privileged: true
+    network_mode: host
+    volumes:
+      - /proc:/host/proc:ro
+      - ./docker/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/utmp:/var/run/utmp
+
+  influxdb:
+    container_name: influxdb
+    image: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      INFLUXDB_USER: ${INFLUXDB_USERNAME}
+      INFLUXDB_USER_PASSWORD: ${INFLUXDB_PASSWORD}
+      INFLUXDB_DB: ${INFLUXDB_DATABASE}
+    volumes:
+      - ./docker/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
+      - ./influxdb-data:/var/lib/influxdb
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    user: "root"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,briangann-gauge-panel,vonage-status-panel,neocat-cal-heatmap-panel
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./docker/grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./docker/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+      - ./docker/grafana/DashboardTelegraf.json:/var/lib/grafana/dashboards/DashboardTelegraf.json
+      - ./grafana-data:/var/lib/grafana
+
     nodered:
         container_name: node-red
         ports:
             - '1880:1880'
         volumes:
-            - 'nodered:/data'
+            - './nodered:/data'
         environment:
             - NODE_OPTIONS=--max_old_space_size=128
         image: nodered/node-red
         networks:
             - ops
     
-    influxdb:
-        container_name: influxdb
-        image: "influxdb"
-        networks:
-          - ops
-        ports:
-          - "8086:8086"
-        volumes:
-          - influxdb:/var/lib/influxdb 
-        environment:
-          - INFLUXDB_DB=remnetmon
-          - INFLUXDB_USER=remmonadmin
-          - INFLUXDB_ADMIN_ENABLED=true
-          - INFLUXDB_ADMIN_USER=admin
-          - INFLUXDB_ADMIN_PASSWORD=g00gler0x 
-        restart: on-failure
-        
-    grafana:
-        container_name: grafana
-        image: "grafana/grafana"
-        networks:
-          - ops
-        ports:
-          - "3000:3000"
-        volumes:
-          - grafana:/var/lib/grafana
-        environment:
-          - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,briangann-gauge-panel,vonage-status-panel,neocat-cal-heatmap-panel
-        restart: on-failure
 
-volumes:
-  nodered:
-  influxdb:
-  grafana:
-
-networks:
-  ops:
-  management:
-  
