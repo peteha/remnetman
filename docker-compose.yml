@@ -14,6 +14,7 @@ services:
       - ./docker/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/run/utmp:/var/run/utmp
+    restart: always
 
   influxdb:
     container_name: influxdb
@@ -27,6 +28,7 @@ services:
     volumes:
       - ./docker/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
       - ./influxdb-data:/var/lib/influxdb
+    restart: always
 
   grafana:
     container_name: grafana
@@ -41,6 +43,7 @@ services:
       - ./docker/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
       - ./docker/grafana/DashboardTelegraf.json:/var/lib/grafana/dashboards/DashboardTelegraf.json
       - ./grafana-data:/var/lib/grafana
+    restart: always
 
   nodered:
     container_name: node-red
@@ -51,6 +54,7 @@ services:
     environment:
       - NODE_OPTIONS=--max_old_space_size=128
     image: nodered/node-red
+    restart: always
 
     
 
