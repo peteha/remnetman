@@ -42,16 +42,16 @@ services:
       - ./docker/grafana/DashboardTelegraf.json:/var/lib/grafana/dashboards/DashboardTelegraf.json
       - ./grafana-data:/var/lib/grafana
 
-    nodered:
-        container_name: node-red
-        ports:
-            - '1880:1880'
-        volumes:
-            - './nodered:/data'
-        environment:
-            - NODE_OPTIONS=--max_old_space_size=128
-        image: nodered/node-red
-        networks:
-            - ops
+  nodered:
+    container_name: node-red
+    ports:
+      - '1880:1880'
+    volumes:
+      - './nodered:/data'
+    environment:
+      - NODE_OPTIONS=--max_old_space_size=128
+    image: nodered/node-red
+    networks:
+      - ops
     
 
