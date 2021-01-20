@@ -35,7 +35,7 @@ services:
     image: grafana/grafana
     user: "root"
     environment:
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,briangann-gauge-panel,vonage-status-panel,neocat-cal-heatmap-panel
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,briangann-gauge-panel,vonage-status-panel,neocat-cal-heatmap-panel,pr0ps-trackmap-panel
     ports:
       - "3000:3000"
     volumes:
