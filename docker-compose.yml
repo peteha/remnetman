@@ -22,9 +22,9 @@ services:
     ports:
       - "8086:8086"
     environment:
-      INFLUXDB_USER: ${INFLUXDB_USERNAME}
-      INFLUXDB_USER_PASSWORD: ${INFLUXDB_PASSWORD}
-      INFLUXDB_DB: ${INFLUXDB_DATABASE}
+      INFLUXDB_USER: admin
+      INFLUXDB_USER_PASSWORD: admin
+      INFLUXDB_DB: netmon
     volumes:
       - ./docker/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
       - ./influxdb-data:/var/lib/influxdb
