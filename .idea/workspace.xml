@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6db11c49-e8b1-4317-a634-fc17e8f33603" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env_dist" beforeDir="false" afterPath="$PROJECT_DIR$/.env_dist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/grafana/DashboardTelegraf.json" beforeDir="false" afterPath="$PROJECT_DIR$/docker/grafana/DashboardTelegraf.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/grafana/dashboard.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/grafana/dashboard.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/grafana/datasource.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/grafana/datasource.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/influxdb/influxdb.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/influxdb/influxdb.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/influxdb/types.db" beforeDir="false" afterPath="$PROJECT_DIR$/docker/influxdb/types.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/telegraf/telegraf-gpu.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/telegraf/telegraf-gpu.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/telegraf/telegraf.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/telegraf/telegraf.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remnetman.code-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/remnetman.code-workspace" afterDir="false" />
-    </list>
+    <list default="true" id="6db11c49-e8b1-4317-a634-fc17e8f33603" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +32,7 @@
       <updated>1613266017340</updated>
       <workItem from="1613266020036" duration="10000" />
       <workItem from="1613902666597" duration="18000" />
+      <workItem from="1613902726127" duration="288000" />
     </task>
     <servers />
   </component>
