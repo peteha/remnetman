@@ -52,6 +52,7 @@ services:
     restart: always
 
   prometheus:
+    container_name: prometheus
     image: prom/prometheus
     volumes:
       - ./docker/prometheus/:/etc/prometheus/
