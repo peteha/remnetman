@@ -1,5 +1,5 @@
 ---
-version: '2.3'
+version: '3.7'
 
 volumes:
     prometheus-data: {}
@@ -49,17 +49,6 @@ services:
       - ./docker/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
       - ./docker/grafana/DashboardTelegraf.json:/var/lib/grafana/dashboards/DashboardTelegraf.json
       - ./grafana-data:/var/lib/grafana
-    restart: always
-
-  nodered:
-    container_name: node-red
-    ports:
-      - '1880:1880'
-    volumes:
-      - './docker/nodered:/data'
-    environment:
-      - NODE_OPTIONS=--max_old_space_size=128
-    image: nodered/node-red
     restart: always
 
   prometheus:
