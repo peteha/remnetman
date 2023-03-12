@@ -6,6 +6,9 @@ volumes:
     grafana-data: {}
     influxdb-data: {}
 
+networks:
+  grafana:
+
 services:
   telegraf:
     container_name: telegraf
@@ -24,13 +27,11 @@ services:
   influxdb:
     container_name: influxdb
     image: influxdb:1.8.10
+    networks:
+      - grafana
     ports:
       - "8086:8086"
       - "2003:2003"
-    environment:
-      INFLUXDB_USER: admin
-      INFLUXDB_USER_PASSWORD: admin
-      INFLUXDB_DB: netmon
     volumes:
       - ./docker/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
       - influxdb-data:/var/lib/influxdb
@@ -39,7 +40,8 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana
-    user: "root"
+    networks:
+      - grafana
     environment:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,briangann-gauge-panel,vonage-status-panel,neocat-cal-heatmap-panel,pr0ps-trackmap-panel
     ports:
@@ -54,6 +56,8 @@ services:
   prometheus:
     container_name: prometheus
     image: prom/prometheus
+    networks:
+      - grafana
     volumes:
       - ./docker/prometheus/:/etc/prometheus/
       - ./prometheus-data:/prometheus
