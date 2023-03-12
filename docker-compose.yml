@@ -24,6 +24,7 @@ services:
   influxdb:
     container_name: influxdb
     image: influxdb:1.8.10
+    network_mode: bridged
     ports:
       - "8086:8086"
       - "2003:2003"
@@ -42,6 +43,7 @@ services:
     user: "root"
     environment:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,briangann-gauge-panel,vonage-status-panel,neocat-cal-heatmap-panel,pr0ps-trackmap-panel
+    network_mode: bridged
     ports:
       - "3000:3000"
     volumes:
@@ -61,6 +63,7 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
+    network_mode: bridged
     ports:
       - 9090:9090
     restart: always
