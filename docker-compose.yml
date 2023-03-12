@@ -1,6 +1,11 @@
 ---
 version: '2.3'
 
+volumes:
+    prometheus-data: {}
+    grafana-data: {}
+    influxdb-data: {}
+
 services:
   telegraf:
     container_name: telegraf
@@ -18,16 +23,17 @@ services:
 
   influxdb:
     container_name: influxdb
-    image: influxdb
+    image: influxdb:1.8.10
     ports:
       - "8086:8086"
+      - "2003:2003"
     environment:
       INFLUXDB_USER: admin
       INFLUXDB_USER_PASSWORD: admin
       INFLUXDB_DB: netmon
     volumes:
       - ./docker/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
-      - ./influxdb-data:/var/lib/influxdb
+      - influxdb-data:/var/lib/influxdb
     restart: always
 
   grafana:
@@ -50,11 +56,23 @@ services:
     ports:
       - '1880:1880'
     volumes:
-      - './nodered:/data'
+      - './docker/nodered:/data'
     environment:
       - NODE_OPTIONS=--max_old_space_size=128
     image: nodered/node-red
     restart: always
 
-    
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./docker/prometheus/:/etc/prometheus/
+      - ./prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    restart: always
 
